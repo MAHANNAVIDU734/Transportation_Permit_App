@@ -16,7 +16,39 @@ import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'react
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
 
+import React, { useState } from "react"
+
+import axios from "axios"
+
 const Register = () => {
+  const [ user, setUser] = useState({
+    username: "",
+    email:"",
+    password:"",
+    reEnterPassword: ""
+})
+
+const handleChange = e => {
+  const { name, value } = e.target
+  setUser({
+      ...user,
+      [name]: value
+  })
+}
+
+const register = () => {
+  const { username, email, password, reEnterPassword } = user
+  if( username && email && password && (password === reEnterPassword)){
+      axios.post("http://localhost:8000/api/auth/register", user)
+      .then( res => {
+          alert(res.data.message)
+          history.push("/login")
+      })
+  } else {
+      alert("invlid input")
+  }
+  
+}
   // ** Hooks
   const { skin } = useSkin()
 
@@ -42,23 +74,30 @@ const Register = () => {
             </CardTitle>
             <CardText className='mb-2'>Make your app management easy and fun!</CardText>
             <Form className='auth-register-form mt-2' onSubmit={e => e.preventDefault()}>
+            {console.log("User", user)}
               <div className='mb-1'>
                 <Label className='form-label' for='register-username'>
                   Username
                 </Label>
-                <Input type='text' id='register-username' placeholder='johndoe' autoFocus />
+                <Input type='text' id='register-username' name="username" value={user.username} onChange={handleChange} placeholder='johndoe' autoFocus />
               </div>
               <div className='mb-1'>
                 <Label className='form-label' for='register-email'>
                   Email
                 </Label>
-                <Input type='email' id='register-email' placeholder='john@example.com' />
+                <Input type='email' id='register-email' name="email" value={user.email} onChange={handleChange} placeholder='john@example.com' />
               </div>
               <div className='mb-1'>
                 <Label className='form-label' for='register-password'>
                   Password
                 </Label>
-                <InputPasswordToggle className='input-group-merge' id='register-password' />
+                <InputPasswordToggle className='input-group-merge' name="password" value={user.password} onChange={handleChange} id='register-password' />
+              </div>
+              <div className='mb-1'>
+                <Label className='form-label' for='register-password'>
+                Re-enter Password
+                </Label>
+                <InputPasswordToggle className='input-group-merge' name="reEnterPassword" value={user.reEnterPassword} onChange={handleChange} id='register-password' />
               </div>
               <div className='form-check mb-1'>
                 <Input type='checkbox' id='terms' />
@@ -69,7 +108,7 @@ const Register = () => {
                   </a>
                 </Label>
               </div>
-              <Button color='primary' block>
+              <Button type="Submit" color='primary' block onClick={register}>
                 Sign up
               </Button>
             </Form>
@@ -100,7 +139,7 @@ const Register = () => {
         </Col>
       </Row>
     </div>
-  )
-}
+  );
+};
 
 export default Register

@@ -43,10 +43,7 @@ const initialValue = {
   Boundary_of_Lands_South: "",
   Land_type: "",
   Reason: "",
-  Permitted_To_Mine: true,
-  Permitted_To_Mine_Date: "",
-  Permitted_To_Mine_Start: "",
-  Permitted_To_Mine_End: "",
+  vehicle_No: "",
   Permitted_To_Transport: true,
   Permitted_To_Transport_Date: "",
   Permitted_To_Transport_Start: "",
@@ -62,10 +59,6 @@ const Timwood = () => {
   const [pickerTransportStart, setPickerTransportStart] = useState(new Date());
   const [pickerTransportEnd, setPickerTransportEnd] = useState(new Date());
   const [dateofRegistration, setdateofRegistration] = useState(new Date());
-  const [permittedTOMineDate, setpermittedTOMineDate] = useState(new Date());
-  const [permittedToMineStart, setpermittedToMineStart] = useState(new Date());
-  const [permittedToMineEnd, setpermittedToMineEnd] = useState(new Date());
-  const [isPermittedMine, setIsPermittedMine] = useState(true);
   const [isPermittedTransport, setIsPermittedTransport] = useState(true);
   const [isApproveOfficer, setIsApproveOfficer] = useState(true);
   const [isApproveVillage, setIsApproveVillage] = useState(true);
@@ -91,7 +84,7 @@ const Timwood = () => {
   const addTimwood = async () => {
     console.log(timwood);
     const res = await saveTimwood(timwood);
-    useqrcode(res.data._id);
+    useqrcode(res.data.Permitted_To_Transport);
     if (res.status == 201) {
       console.log("Add Timber & Wood successfully!");
       MySwal.fire({
@@ -262,72 +255,16 @@ const Timwood = () => {
             name="Reason"
             onChange={(e) => onValueChange(e)}
           />
-          <Label for="switch-primary" className="form-check-label mb-50">
-            Permitted To Mine
-          </Label>
-          <div className="form-switch form-check-primary">
-            <Input
-              type="switch"
-              id="switch-primary"
-              name="Permitted_To_Mine"
-              checked={isPermittedMine}
-              className="form-control"
-              onClick={() => {
-                setIsPermittedMine(!isPermittedMine);
-                // onValueChangeSwitch(!isPermittedMine, "Permitted_To_Mine");
-              }}
-              onChange={(e) =>
-                onValueChangeSwitch(!isPermittedMine, "Permitted_To_Mine")
-              }
-            />
-          </div>
-          <Fragment>
-            <Col lg="4" md="6" className="mb-1">
-              <Label className="form-label" for="date-time-picker">
-                Permitted TO Mine Date
-              </Label>
-              <Flatpickr
-                value={permittedTOMineDate}
-                data-enable-time
-                id="date-picker"
-                className="form-control"
-                name="Permitted_To_Mine_Date"
-                onChange={(date) =>
-                  onValueChangeDates(date, "Permitted_To_Mine_Date")
-                }
-              />
-            </Col>
-          </Fragment>
-          <Fragment>
-            <Label className="form-label" for="date-time-picker">
-              Permitted To Mine Start
-            </Label>
-            <Flatpickr
-              value={permittedToMineStart}
-              data-enable-time
-              id="date-time-picker"
-              className="form-control"
-              name="Permitted_To_Mine_Start"
-              onChange={(date) =>
-                onValueChangeDates(date, "Permitted_To_Mine_Start")
-              }
-            />
-          </Fragment>
-          <Fragment>
-            <Label className="form-label" for="date-time-picker">
-              Permitted To Mine End
-            </Label>
-            <Flatpickr
-              value={permittedToMineEnd}
-              data-enable-time
-              id="date-time-picker"
-              className="form-control"
-              name="Permitted_To_Mine_End"
-              onChange={(date) =>
-                onValueChangeDates(date, "Permitted_To_Mine_End")
-              }
-            />
-          </Fragment>
+          <Label for="Vehicle_No_Plate_ID">Vehicle No Plate ID</Label>
+          <Input
+            type="text"
+            id="Vehicle_No_Plate_ID"
+            placeholder="CP LA-XXXX"
+            className="form-control"
+            //value={vehicle_no_plate_id}
+            name="vehicle_No"
+            onChange={(e) => onValueChange(e)}
+          />
           <Label for="switch-primary" className="form-check-label mb-50">
             Permitted To Transport
           </Label>

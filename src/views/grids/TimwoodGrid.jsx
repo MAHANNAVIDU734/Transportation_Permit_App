@@ -75,18 +75,10 @@ const TimwoodGrid = () => {
         // },
       },
       {
-        field: "Permitted_To_Mine",
-        headerName: "Mine Permit",
-        width: 100,
+        field: "vehicle_No",
+        headerName: "Vehicle No",
+        width: 80,
         editable: true,
-        type: "boolean",
-      },
-      {
-        field: "Permitted_To_Mine_Date",
-        headerName: "Mine Date",
-        width: 100,
-        editable: true,
-        renderCell: (params) => new Date(params.value[0]).toLocaleDateString(),
       },
       {
         field: "Permitted_To_Transport",

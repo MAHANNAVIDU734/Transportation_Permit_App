@@ -4,8 +4,33 @@ import { Facebook, Twitter, Mail, GitHub } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
 import { Row, Col, CardTitle, CardText, Form, Label, Input, Button } from 'reactstrap'
 import '@styles/react/pages/page-authentication.scss'
+import React,{useState} from 'react'
+import axios from 'axios';
+import {useHistory} from "react-router-dom"
 
-const Login = () => {
+
+
+const Login = ({setLoginUser}) => {
+  const history = useHistory()
+  const [user,setUser] = useState({
+    email:"",
+    password: ""
+})
+const handleChange = e => {
+  const { name, value } = e.target
+  setUser({
+      ...user,
+      [name]: value
+  })
+}
+const login = () => {
+  axios.post("http://localhost:8000/api/auth/login", user)
+  .then(res => {
+      alert(res.data.message)
+      setLoginUser(res.data.user)
+      history.push("/")
+  })
+}
   const { skin } = useSkin()
 
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
@@ -33,7 +58,7 @@ const Login = () => {
                 <Label className='form-label' for='login-email'>
                   Email
                 </Label>
-                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus />
+                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus value={user.email} onChange={handleChange} />
               </div>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
@@ -44,7 +69,7 @@ const Login = () => {
                     <small>Forgot Password?</small>
                   </Link>
                 </div>
-                <InputPasswordToggle className='input-group-merge' id='login-password' />
+                <InputPasswordToggle className='input-group-merge' value={user.password} onChange={handleChange} id='login-password' />
               </div>
               <div className='form-check mb-1'>
                 <Input type='checkbox' id='remember-me' />
@@ -52,13 +77,13 @@ const Login = () => {
                   Remember Me
                 </Label>
               </div>
-              <Button color='primary' tag={Link} block to='/dashboard'>
+              <Button color='primary' tag={Link} block to='/dashboard' onClick={login}>
                 Sign in
               </Button>
             </Form>
             <p className='text-center mt-2'>
               <span className='me-25'>New on our platform?</span>
-              <Link to='/register'>
+              <Link onClick={() => history.push("/register")}>
                 <span>Create an account</span>
               </Link>
             </p>

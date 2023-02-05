@@ -80,6 +80,8 @@ const Sgsoil = () => {
     console.log(sgsoil);
     const res = await saveSgsoil(sgsoil);
     useqrcode(res.data._id);
+    // useqrcode(res.data.permitted_to_Transport_End);
+    // useqrcode(res.data.permitted_to_Transport);
     if (res.status == 201) {
       console.log("Add Sand, Gravel, Soil successfully!");
       MySwal.fire({

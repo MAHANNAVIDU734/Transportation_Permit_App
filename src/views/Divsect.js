@@ -47,7 +47,7 @@ const Divsect = () => {
     //console.log(res.data._id);
     useqrcode(res.data._id);
     if (res.status == 201) {
-      console.log("Add devsec successfully!");
+      console.log("Add devsect successfully!");
       MySwal.fire({
         icon: "success",
         title: "Add Divisional Secetries successful",
