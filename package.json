@@ -5,7 +5,7 @@
     "dependencies": {
         "@casl/ability": "^5.2.2",
         "@casl/react": "^2.1.1",
-        "@craco/craco": "^6.4.2",
+        "@craco/craco": "^7.1.0",
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
         "@fullcalendar/core": "^5.10.1",
@@ -42,7 +42,7 @@
         "i18next-browser-languagedetector": "^6.1.2",
         "i18next-xhr-backend": "^3.2.2",
         "jquery": "^3.5.1",
-        "jsonwebtoken": "~8.5.1",
+        "jsonwebtoken": "~9.0.1",
         "moment": "^2.29.1",
         "nouislider": "^15.5.0",
         "nouislider-react": "^3.3.8",
@@ -74,7 +74,7 @@
         "react-rating": "^2.0.5",
         "react-redux": "^7.2.0",
         "react-router-dom": "^5.3.3",
-        "react-scripts": "^4.0.2",
+        "react-scripts": "^5.0.1",
         "react-select": "^5.2.0",
         "react-shepherd": "^3.3.6",
         "react-slidedown": "^2.4.5",
@@ -105,7 +105,7 @@
     },
     "devDependencies": {
         "@types/sortablejs": "^1.10.6",
-        "sass-loader": "8.0.2"
+        "sass-loader": "13.3.2"
     },
     "browserslist": {
         "production": [
